@@ -19,6 +19,7 @@ var sendEmail = function(){
             message: message
         },
         function(data, status){
+            console.log(data);
             if (data === "1"){
                 alert("codice: " + data + " Email Inviata! Grazie per averci contattato. Le risponderemo il prima possibile.");
                 document.getElementById("contactform").reset();
