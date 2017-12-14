@@ -1,0 +1,37 @@
+{
+  "name": "fido",
+  "version": "1.0.0",
+  "description": "an app to discover trento places and surroundings",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine spec/spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neboduus/SE2_16_173901_P.git"
+  },
+  "author": "marian diaconu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neboduus/SE2_16_173901_P/issues"
+  },
+  "homepage": "https://github.com/neboduus/SE2_16_173901_P#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.4",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "jasmine": "^2.5.2",
+    "jasmine-node": "^1.14.5",
+    "multer": "^1.2.0",
+    "pg": "^6.1.0",
+    "pg-promise": "^5.4.7",
+    "request": "^2.79.0"
+  },
+  "keywords": [
+    "fido",
+    "salone",
+    "toelettatura"
+  ],
+  "devDependencies": {}
+}

@@ -1,0 +1,15 @@
+{
+<<<<<<< HEAD
+  "spec_dir": "spec",
+=======
+  "spec_dir": "../spec",
+>>>>>>> dev
+  "spec_files": [
+    "**/*[sS]pec.js"
+  ],
+  "helpers": [
+    "helpers/**/*.js"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": false
+}

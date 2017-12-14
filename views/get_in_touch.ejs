@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../views/metatags.ejs %>
+</head>
+<body>
+    <div id="wrapper">
+        <% include ../views/header.ejs %>
+        
+        <section id="inner-headline">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="breadcrumb">
+                            <li><a href="#"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
+                            <li class="active">Dove Siamo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="content">
+            <div class="map">
+            <br>
+                <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAuDRoGHiVi6eO5BMNCY4LdSsDECifxbsU&q=SALONE+FIDO+MEZZOCORONA+(TN)+di+Nicole+Bottamedi+TOELETTATURA">
+                </iframe>
+            </div>
+
+            <div class="container">
+                <div class="row align-center">
+                    <div class="col-lg-6">
+                        <h3>
+                            Via Dante Alighieri 22/H <br> 398015 Mezzocorona (TN) <br> 340-1744734 <br> email@domainname.it
+                        </h3>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h3>
+                            Orario <br> Dal Lunedì al Sabato <br> ore: 9.00-18.00
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4>Puoi contattarci <strong>completando i campi qui sotto</strong></h4>
+                        <form id="contactform" action="contact/contact.php" method="post" class="validateform" name="send-contact">
+                            <div id="sendmessage">
+                                 Il tuo messaggio è stato inviato! Grazie per averci contattato!
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4 field">
+                                    <input type="text" name="name" placeholder="* Nome e Cognome" data-rule="maxlen:4" data-msg="Inserisci almeno 4 caratteri" />
+                                    <div class="validation">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 field">
+                                    <input type="text" name="email" placeholder="* Indirizzo Email" data-rule="email" data-msg="Inserisci almeno 4 caratteri" />
+                                    <div class="validation">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 field">
+                                    <input type="text" name="subject" placeholder="Soggetto del messaggio" data-rule="maxlen:4" data-msg="Inserisci almeno 4 caratteri" />
+                                    <div class="validation">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 margintop10 field">
+                                    <textarea rows="12" name="message" class="input-block-level" placeholder="* Scrivi qui il tuo messaggio..." data-rule="required" data-msg="Scrivi qualcosa"></textarea>
+                                    <div class="validation">
+                                    </div>
+                                    <p>
+                                        <button class="btn btn-theme margintop10 pull-left" type="submit">Submit message</button>
+                                        <span class="pull-right margintop20">* Riempi tutti i campi per favore!</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <% include ../views/footer.ejs %>
+    </div>
+
+    <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+    <% include ../views/scripts.ejs %>
+    <script src="js/validate.js"></script>
+    
+</body>
+</html>
