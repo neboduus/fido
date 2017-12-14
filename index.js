@@ -1,5 +1,9 @@
 //utility lib
 var util = require('util');
+//mailer
+var nodemailer = require('nodemailer');
+//print information about your request on the command line
+var morgan = require('morgan');
 //express lib
 var express = require('express');
 //connect DB
@@ -38,9 +42,10 @@ app.set('port', (process.env.PORT || 5000));
 //parsers for body
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 //set host for views
 app.locals.host = "http://localhost:5000";
+// set morgan to log info about our requests for development use.
+app.use(morgan('dev'));
 
 /**
  * @brief binds to home page
@@ -77,6 +82,84 @@ app.get('/gallery', function(req, res){
     res.set('Content-Type', 'text/html');
     res.status(200).render('gallery.ejs');
 });
+
+
+app.post('/sendEmail', function(req, res){ 
+    res.set('Content-Type', 'text/html');
+    var name;
+    var cellphone;
+    var email;
+    var subject;
+    var message;
+    
+    if( typeof req.body!='undefined' && req.body){
+        if(typeof req.body.placeName != undefined && req.body.placeName){
+            name = req.body.placeName;
+        }else{
+            res.status(500).end("-1");
+        }
+        
+        if(typeof req.body.placeAddress != 'undefined' && req.body.placeAddress){
+            address = req.body.placeAddress;
+        }else{
+           res.status(500).end("-2");
+        }
+        
+        if(typeof req.body.placeHistory != 'undefined' && req.body.placeHistory){
+            history = req.body.placeHistory;
+        }else{
+            res.status(500).end("-3");
+        }
+        
+        if(typeof req.body.placeInfo != 'undefined' && req.body.placeInfo){
+            info = req.body.placeInfo;
+        }else{
+            res.status(500).end("-4");
+        }
+        
+        if(typeof req.body.placeType != 'undefined' && req.body.placeType){
+            type = parseInt(req.body.placeType);
+        }else{
+            res.status(500).end("-5");
+        }
+
+       
+        //all the parameters was inserted
+        console.log("email parameters OK");
+
+        //send the email
+        var transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: 'salone.fido.bottamedi@gmail.com',
+            pass: 'Mezzocorona2017'
+          }
+        });
+
+        var mailOptions = {
+          from: 'salone.fido.bottamedi@gmail.com',
+          to: 'neboduus@gmail.com',
+          subject: 'Sending Email using Node.js',
+          text: "message"
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+          if (error) {
+            console.log(error);
+            res.status(500).end("-6");
+          } else {
+            console.log('Email sent: ' + info.response);
+            res.status(200).end("1");
+          }
+        });
+            
+    }else{
+        //redirect to the page with a message
+        res.status(500).end("-7");
+    }
+});
+
+
 
 /*
  * @brief intercepts all GET requests to see departments of unitn
@@ -668,5 +751,5 @@ app.post('/eventUpload', function(req, res){
 
 //start server
 app.listen(app.get('port'), function() {
-  console.log('Discover Trento app is running on port', app.get('port'));
+  console.log('fido app is running on port', app.get('port'));
 });
