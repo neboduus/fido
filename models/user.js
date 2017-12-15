@@ -39,5 +39,10 @@ sequelize.sync()
     .then(() => console.log('users table has been successfully created, if one doesn\'t exist'))
     .catch(error => console.log('This error occured', error));
 
+//define validPassword()
+User.prototype.validPassword = function(password) {
+  return bcrypt.compareSync(password,this.password)  
+}
+
 // export User model for use in other files.
 module.exports = User;
