@@ -1,0 +1,2 @@
+# set postgres ENV_PATH on macOSX
+export PGDATA=/usr/local/var/postgres

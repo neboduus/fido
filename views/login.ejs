@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../views/metatags.ejs %>
+    </head>
+    <body>
+        <% include ../views/header.ejs %>
+        <div id="wrapper">
+            <div class="container row">
+            <div class="jumbotron col-sm-4 pull-center">
+                <form action="/login" method="post">
+                    <div>
+                        <label>Username:</label>
+                        <input type="text" name="username"/>
+                    </div>
+                    <div>
+                        <label>Password:</label>
+                        <input type="password" name="password"/>
+                    </div>
+                    <div>
+                        <input class="btn btn-primary" type="submit" value="Log In"/>
+                    </div>
+                </form>                  
+            </div>          
+        </div>
+            
+            <% include ../views/footer.ejs %>
+        </div>
+        <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+        <% include ../views/scripts %>
+    </body>
+</html>
