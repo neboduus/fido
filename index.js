@@ -51,7 +51,7 @@ app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //set host for views
-app.locals.host = "https://sheltered-hamlet-62800.herokuapp.com";
+app.locals.host = "https://salone-fido.herokuapp.com";
 // set morgan to log info about our requests for development use.
 app.use(morgan('dev'));
 
@@ -99,35 +99,38 @@ app.post('/sendEmail', function(req, res){
     var message;
     
     if( typeof req.body!='undefined' && req.body){
-        if(typeof req.body.placeName != undefined && req.body.placeName){
-            name = req.body.placeName;
+        
+        if(typeof req.body.name != undefined && req.body.name){
+            name = req.body.name;
         }else{
             res.status(500).end("-1");
         }
         
-        if(typeof req.body.placeAddress != 'undefined' && req.body.placeAddress){
-            address = req.body.placeAddress;
+        if(typeof req.body.email != 'undefined' && req.body.email){
+            email = req.body.email;
         }else{
            res.status(500).end("-2");
         }
         
-        if(typeof req.body.placeHistory != 'undefined' && req.body.placeHistory){
-            history = req.body.placeHistory;
-        }else{
-            res.status(500).end("-3");
-        }
-        
-        if(typeof req.body.placeInfo != 'undefined' && req.body.placeInfo){
-            info = req.body.placeInfo;
+        if(typeof req.body.cellphone != 'undefined' && req.body.cellphone){
+            cellphone = req.body.cellphone;
         }else{
             res.status(500).end("-4");
         }
         
-        if(typeof req.body.placeType != 'undefined' && req.body.placeType){
-            type = parseInt(req.body.placeType);
+        if(typeof req.body.subject != 'undefined' && req.body.subject){
+            subject = req.body.subject;
         }else{
             res.status(500).end("-5");
         }
+        
+        if(typeof req.body.message != 'undefined' && req.body.message){
+            message = req.body.message;
+        }else{
+            res.status(500).end("-5");
+        }
+        
+        console.log(message + " " + subject + " " + cellphone + " " + email + " " + name)
 
         //send the email
         var transporter = nodemailer.createTransport({
@@ -140,9 +143,9 @@ app.post('/sendEmail', function(req, res){
 
         var mailOptions = {
           from: 'salone.fido.bottamedi@gmail.com',
-          to: 'neboduus@gmail.com',
-          subject: 'Sending Email using Node.js',
-          text: "message"
+          to: 'salone.fido.bottamedi@gmail.com',
+          subject: subject,
+          text: message
         };
 
         transporter.sendMail(mailOptions, function(error, info){
