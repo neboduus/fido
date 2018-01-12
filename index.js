@@ -92,6 +92,24 @@ app.get('/gallery', function(req, res){
 // route for user Login
 app.route('/login')
     .get(sessionChecker, (req, res) => {
+        res.set('Content-Type', 'text/html');
+        res.status(200).render('login.ejs');
+    })
+    .post((req, res) => {
+        var username = req.body.username,
+            password = req.body.password;
+
+        User.findOne({ where: { username: username } }).then(function (user) {
+            if (!user) {
+                res.redirect('/login');
+            } else if (!user.validPassword(password)) {
+                res.redirect('/login');
+            } else {
+                req.session.user = user.dataValues;
+                res.redirect('/dashboard');
+            }
+        });
+    });
 
 app.post('/sendEmail', function(req, res){ 
     res.set('Content-Type', 'text/html');
