@@ -23,6 +23,8 @@ app.use("/css", express.static(__dirname + '/css'));
 app.use("/js", express.static(__dirname + '/js'));
 app.use("/fonts", express.static(__dirname + '/fonts'));
 app.use("/modules", express.static(__dirname + '/modules'));
+app.use("/galleria", express.static(__dirname + '/galleria'));
+app.use("/photo_swipe", express.static(__dirname + '/photo_swipe'));
 
 // initialize cookie-parser to allow us access the cookies stored in the browser. 
 app.use(cookieParser());
