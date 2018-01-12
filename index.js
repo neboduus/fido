@@ -51,7 +51,7 @@ app.set('port', (process.env.PORT || 5000));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //set host for views
-app.locals.host = "http://localhost:5000";
+app.locals.host = "https://sheltered-hamlet-62800.herokuapp.com/";
 // set morgan to log info about our requests for development use.
 app.use(morgan('dev'));
 
