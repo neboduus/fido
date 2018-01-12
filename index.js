@@ -89,27 +89,6 @@ app.get('/gallery', function(req, res){
     res.status(200).render('gallery.ejs');
 });
 
-// route for user Login
-app.route('/login')
-    .get(sessionChecker, (req, res) => {
-        res.set('Content-Type', 'text/html');
-        res.status(200).render('login.ejs');
-    })
-    .post((req, res) => {
-        var username = req.body.username,
-            password = req.body.password;
-
-        User.findOne({ where: { username: username } }).then(function (user) {
-            if (!user) {
-                res.redirect('/login');
-            } else if (!user.validPassword(password)) {
-                res.redirect('/login');
-            } else {
-                req.session.user = user.dataValues;
-                res.redirect('/dashboard');
-            }
-        });
-    });
 
 app.post('/sendEmail', function(req, res){ 
     res.set('Content-Type', 'text/html');
@@ -150,10 +129,6 @@ app.post('/sendEmail', function(req, res){
             res.status(500).end("-5");
         }
 
-       
-        //all the parameters was inserted
-        console.log("email parameters OK");
-
         //send the email
         var transporter = nodemailer.createTransport({
           service: 'gmail',
@@ -186,68 +161,6 @@ app.post('/sendEmail', function(req, res){
     }
 });
 
-
-
-/*
- * @brief intercepts all GET requests to see departments of unitn
- *        connects to DB, collects all data for all the departments
- * @return a page with a list of all departments of unitn
- */
-app.get('/departments', function(req, res){
-    rendering.renderPlaceByType(0, res);
-});
-
-/*
- * @brief intercepts all GET requests to see libraries of unitn
- *        connects to DB, collects all data for all the libraries
- * @return a page with a list of all libraries of unitn
- */
-app.get('/libraries', function(req, res){
-    rendering.renderPlaceByType(1, res);
-});
-
-/*
- * @brief intercepts all GET requests to see squares of Trento city
- *        connects to DB, collects all data for all the squares
- * @return a page with a list of all squares of unitn
- */
-app.get('/squares', function(req, res){
-    rendering.renderPlaceByType(2, res);
-});
-
-/*
- * @brief intercepts all GET requests to see monuments of Trento city
- *        connects to DB, collects all data for all the monuments
- * @return a page with a list of all monuments of unitn
- */
-app.get('/monuments', function(req, res){
-   rendering.renderPlaceByType(3, res);
-});
-
-/*
- * @brief intercepts all GET requests to see events of Trento city
- *        connects to DB, collects all data for all the events
- * @return a page with a list of all events of unitn
- */
-app.get('/events', function(req, res){
-    rendering.renderByTable('event', res);
-});
-
-/*
- * @brief intercepts all GET requests to see events of Trento city
- *        connects to DB, collects all data for all the events
- * @return a page with a list of all events of unitn
- */
-app.get('/news', function(req, res){
-    rendering.renderByTable('news', res);
-});
-
-/*
- *GET information for a specific place
- */
-app.post('/place',function(req, res){
-    rendering.renderPlaceById(req, res);
-});
 
 /**
  * intercepts request GET to private space 
