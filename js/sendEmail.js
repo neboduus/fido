@@ -10,7 +10,7 @@ function sendEmail(){
     if (name==="" || email==="" || cellphone==="" || subject==="" || message===""){
         alert("Non hai completato tutti i campi. Ricontrolla con attenzione!");
     }else{
-        $.post("http://localhost:5000/sendEmail",
+        $.post("https://salone-fido.herokuapp.com/sendEmail",
         {
             name: name,
             email: email,
