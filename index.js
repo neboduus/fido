@@ -245,7 +245,7 @@ app.get("/login", function(req, res){
     }else{
         res.set('Content-Type', 'text/html');
         res.status(200).render('login.ejs');
-    })
+    }})
     .post((req, res) => {
         var username = req.body.username,
             password = req.body.password;
@@ -315,5 +315,5 @@ app.route('/signup')
 
 //start server
 app.listen(app.get('port'), function() {
-  console.log('fido app is running on port', app.get('port'));
+    console.log('fido app is running on port', app.get('port'));
 });
