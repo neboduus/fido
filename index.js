@@ -243,7 +243,6 @@ app.get("/login", function(req, res){
         //redirect to manage info page
         res.status(200).render('insert.ejs');
     }else{
->>>>>>> mailer
         res.set('Content-Type', 'text/html');
         res.status(200).render('login.ejs');
     })
