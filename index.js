@@ -1,5 +1,9 @@
 //utility lib
 var util = require('util');
+//mailer
+var nodemailer = require('nodemailer');
+//print information about your request on the command line
+var morgan = require('morgan');
 //express lib
 var express = require('express');
 //connect DB
@@ -46,9 +50,10 @@ app.set('port', (process.env.PORT || 5000));
 //parsers for body
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 //set host for views
 app.locals.host = "http://localhost:5000";
+// set morgan to log info about our requests for development use.
+app.use(morgan('dev'));
 
 // This middleware will check if user's cookie is still saved in browser and user is not set, then automatically log the user out.
 // This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
@@ -87,6 +92,158 @@ app.get('/gallery', function(req, res){
 // route for user Login
 app.route('/login')
     .get(sessionChecker, (req, res) => {
+
+app.post('/sendEmail', function(req, res){ 
+    res.set('Content-Type', 'text/html');
+    var name;
+    var cellphone;
+    var email;
+    var subject;
+    var message;
+    
+    if( typeof req.body!='undefined' && req.body){
+        if(typeof req.body.placeName != undefined && req.body.placeName){
+            name = req.body.placeName;
+        }else{
+            res.status(500).end("-1");
+        }
+        
+        if(typeof req.body.placeAddress != 'undefined' && req.body.placeAddress){
+            address = req.body.placeAddress;
+        }else{
+           res.status(500).end("-2");
+        }
+        
+        if(typeof req.body.placeHistory != 'undefined' && req.body.placeHistory){
+            history = req.body.placeHistory;
+        }else{
+            res.status(500).end("-3");
+        }
+        
+        if(typeof req.body.placeInfo != 'undefined' && req.body.placeInfo){
+            info = req.body.placeInfo;
+        }else{
+            res.status(500).end("-4");
+        }
+        
+        if(typeof req.body.placeType != 'undefined' && req.body.placeType){
+            type = parseInt(req.body.placeType);
+        }else{
+            res.status(500).end("-5");
+        }
+
+       
+        //all the parameters was inserted
+        console.log("email parameters OK");
+
+        //send the email
+        var transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: 'salone.fido.bottamedi@gmail.com',
+            pass: 'Mezzocorona2017'
+          }
+        });
+
+        var mailOptions = {
+          from: 'salone.fido.bottamedi@gmail.com',
+          to: 'neboduus@gmail.com',
+          subject: 'Sending Email using Node.js',
+          text: "message"
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+          if (error) {
+            console.log(error);
+            res.status(500).end("-6");
+          } else {
+            console.log('Email sent: ' + info.response);
+            res.status(200).end("1");
+          }
+        });
+            
+    }else{
+        //redirect to the page with a message
+        res.status(500).end("-7");
+    }
+});
+
+
+
+/*
+ * @brief intercepts all GET requests to see departments of unitn
+ *        connects to DB, collects all data for all the departments
+ * @return a page with a list of all departments of unitn
+ */
+app.get('/departments', function(req, res){
+    rendering.renderPlaceByType(0, res);
+});
+
+/*
+ * @brief intercepts all GET requests to see libraries of unitn
+ *        connects to DB, collects all data for all the libraries
+ * @return a page with a list of all libraries of unitn
+ */
+app.get('/libraries', function(req, res){
+    rendering.renderPlaceByType(1, res);
+});
+
+/*
+ * @brief intercepts all GET requests to see squares of Trento city
+ *        connects to DB, collects all data for all the squares
+ * @return a page with a list of all squares of unitn
+ */
+app.get('/squares', function(req, res){
+    rendering.renderPlaceByType(2, res);
+});
+
+/*
+ * @brief intercepts all GET requests to see monuments of Trento city
+ *        connects to DB, collects all data for all the monuments
+ * @return a page with a list of all monuments of unitn
+ */
+app.get('/monuments', function(req, res){
+   rendering.renderPlaceByType(3, res);
+});
+
+/*
+ * @brief intercepts all GET requests to see events of Trento city
+ *        connects to DB, collects all data for all the events
+ * @return a page with a list of all events of unitn
+ */
+app.get('/events', function(req, res){
+    rendering.renderByTable('event', res);
+});
+
+/*
+ * @brief intercepts all GET requests to see events of Trento city
+ *        connects to DB, collects all data for all the events
+ * @return a page with a list of all events of unitn
+ */
+app.get('/news', function(req, res){
+    rendering.renderByTable('news', res);
+});
+
+/*
+ *GET information for a specific place
+ */
+app.post('/place',function(req, res){
+    rendering.renderPlaceById(req, res);
+});
+
+/**
+ * intercepts request GET to private space 
+ * if already logged in redirect to a page that allows to manage 
+ * site places, events and news
+ */
+app.get("/login", function(req, res){
+    var sess = req.session;
+    //checking for session
+    if (typeof sess.username != 'undefined' && sess.username){
+        //redirect to manage info page
+        res.status(200).render('insert.ejs');
+    }else{
+>>>>>>> mailer
         res.set('Content-Type', 'text/html');
         res.status(200).render('login.ejs');
     })

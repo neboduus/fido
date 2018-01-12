@@ -53,23 +53,30 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-4 field">
-                                    <input type="text" name="name" placeholder="* Nome e Cognome" data-rule="maxlen:4" data-msg="Inserisci almeno 4 caratteri" />
+                                <div class="col-lg-6 field">
+                                    <input type="text" id="name" placeholder="* Nome e Cognome" data-rule="maxlen:4" data-msg="Inserisci almeno 4 caratteri" />
                                     <div class="validation">
                                     </div>
                                 </div>
-                                <div class="col-lg-4 field">
-                                    <input type="text" name="email" placeholder="* Indirizzo Email" data-rule="email" data-msg="Inserisci almeno 4 caratteri" />
+                                <div class="col-lg-6 field">
+                                    <input type="text" id="email" placeholder="* Indirizzo Email" data-rule="email" data-msg="Inserisci almeno 4 caratteri" />
                                     <div class="validation">
                                     </div>
                                 </div>
-                                <div class="col-lg-4 field">
-                                    <input type="text" name="subject" placeholder="Soggetto del messaggio" data-rule="maxlen:4" data-msg="Inserisci almeno 4 caratteri" />
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 field">
+                                    <input type="text" id="subject" placeholder="* Titolo Messaggio" data-rule="maxlen:4" data-msg="Inserisci almeno 4 caratteri" />
+                                    <div class="validation">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 field">
+                                    <input type="text" id="cellphone" placeholder="* Tuo numero di Telefono" data-rule="maxlen:4" data-msg="Inserisci almeno 4 caratteri" />
                                     <div class="validation">
                                     </div>
                                 </div>
                                 <div class="col-lg-12 margintop10 field">
-                                    <textarea rows="12" name="message" class="input-block-level" placeholder="* Scrivi qui il tuo messaggio..." data-rule="required" data-msg="Scrivi qualcosa"></textarea>
+                                    <textarea rows="12" id="message" class="input-block-level" placeholder="* Scrivi qui il tuo messaggio..." data-rule="required" data-msg="Scrivi qualcosa"></textarea>
                                     <div class="validation">
                                     </div>
                                     <p>
@@ -88,7 +95,7 @@
 
     <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
     <% include ../views/scripts.ejs %>
-    <script src="js/validate.js"></script>
+    <script src="js/sendEmail.js"></script>
     
 </body>
 </html>
