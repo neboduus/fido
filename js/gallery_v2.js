@@ -34,7 +34,6 @@ $.each($(".img-button"), function(key, val)
     imageLookup[image] = imagesTotal;
     images.push({src:image, caption:caption});
     imagesTotal++;
-    window.scrollBy(0, 50)
 });
 
 //********************
