@@ -86,11 +86,6 @@ app.get('/get_in_touch', function(req, res){
 
 app.get('/gallery', function(req, res){
     res.set('Content-Type', 'text/html');
-    res.status(200).render('gallery.ejs');
-});
-
-app.get('/gallery_v2', function(req, res){
-    res.set('Content-Type', 'text/html');
     res.status(200).render('gallery_v2.ejs');
 });
 

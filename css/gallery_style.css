@@ -14,6 +14,15 @@ body{
 	padding:6px;	
 	overflow:hidden;
 }
+#img-resized{
+    position: relative;
+    float: left;
+    width:  200px;
+    height: 200px;
+    background-position: 50% 50%;
+    background-repeat:   no-repeat;
+    background-size:     cover;
+}
 .img-button{
 	cursor:pointer;
 }
@@ -159,7 +168,7 @@ body{
 	color:white;
 }
 
-@media (min-width:763px){
+@media (min-width:300px){
 	.modal-dialog{
 		width:80%;	
 	}

@@ -485,7 +485,7 @@ section.callaction {
 
 #content img {
 	max-width:100%;
-	height:auto;
+	/* height:auto; */
 }
 
 /* --- Call to action --- */
@@ -569,7 +569,7 @@ section.callaction {
 ==================================== */
 
 #inner-headline{
-	background: rgba(8, 8, 8, 0.5);
+	background: beige;
     position: relative;
     margin: 0;
     padding: 0;
